@@ -229,7 +229,7 @@ async def kang(args):
                 await bot.send_read_acknowledge(conv.chat_id)
 
         await args.edit(f"\
-            [here](t.me/addstickers/{packname})",
+            [DISINI](t.me/addstickers/{packname})",
                         parse_mode='md')
 
 
