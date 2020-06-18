@@ -18,8 +18,8 @@ from userbot.events import register
 
 # ========================= CONSTANTS ============================
 AFKSTR = [
-    "Can u read this message clearly? I'M AFK SUW",
-    "I'm AFK right now!",
+    "Can u read this message clearly? I'M NOT AVAILABLE NOW SU",
+    "I'm away from keyboard right now!",
     
 ]
 
