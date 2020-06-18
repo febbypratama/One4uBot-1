@@ -50,9 +50,9 @@ async def set_afk(afk_e):
     afk_start = start_1.replace(microsecond=0)
     if string:
         AFKREASON = string
-        await afk_e.edit(f"**Gonna go AFK. I'll be right back.**")
+        await afk_e.edit(f"**Into The Hell!.**")
     else:
-        await afk_e.edit("**Gonna go AFK. I'll be right back.**")
+        await afk_e.edit("**Into The Hell!.**")
     if user.last_name:
         await afk_e.client(UpdateProfileRequest(first_name=user.first_name, last_name=user.last_name + " [OFF]"))
     else:
@@ -86,7 +86,7 @@ async def type_afk_is_not_true(notafk):
     afk_end = back_alive.replace(microsecond=0)
     if ISAFK:
         ISAFK = False
-        msg = await notafk.edit("**I'm back! Did you guys miss me?**")
+        msg = await notafk.edit("**I'm back! Hell was bored.**")
         time.sleep(3)
         await msg.delete()
         await notafk.client(UpdateProfileRequest(first_name=user.first_name, last_name=last1))
@@ -157,18 +157,18 @@ async def mention_afk(mention):
             afk_since = f"`{int(seconds)}s`"
         if mention.sender_id not in USERS:
             if AFKREASON:
-                await mention.reply(f"**I've been AFK.** (Since {afk_since} ago.)\
+                await mention.reply(f"**I'm Still in Hell.** (Since {afk_since} ago.)\
                         \n**Reason:** `{AFKREASON}`")
             else:
-                await mention.reply(f"**I've been AFK.** (Since {afk_since} ago.)")
+                await mention.reply(f"**What? I'm still not available.** (Since {afk_since} ago.)")
             USERS.update({mention.sender_id: 1})
         else:
             if USERS[mention.sender_id] % randint(2, 4) == 0:
                 if AFKREASON:
-                    await mention.reply(f"**I'm still AFK.** (Since {afk_since} ago.)\
+                    await mention.reply(f"**No no lagi off bentar ea!.** (Since {afk_since} ago.)\
                             \n**Reason:** `{AFKREASON}`")
                 else:
-                    await mention.reply(f"**I'm still AFK.** (Since {afk_since} ago.)")
+                    await mention.reply(f"**Masih belum balik orangnya tunggu ya.** (Since {afk_since} ago.)")
             USERS[mention.sender_id] = USERS[mention.sender_id] + 1
         COUNT_MSG = COUNT_MSG + 1
 
