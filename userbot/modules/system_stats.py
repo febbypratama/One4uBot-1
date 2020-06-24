@@ -1,6 +1,6 @@
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
-# Licensed under the Raphielscape Public License, Version 1.d (the "License");
+# Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
 """ Userbot module for getting information about the server. """
@@ -11,8 +11,7 @@ from platform import python_version, uname
 from shutil import which
 from os import remove
 from telethon import version
-
-from userbot import CMD_HELP, ALIVE_NAME, UPSTREAM_REPO_BRANCH
+from userbot import bot, CMD_HELP, ALIVE_NAME, UPSTREAM_REPO_BRANCH, ALIVE_LOGO
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -79,7 +78,7 @@ async def bot_ver(event):
                              "`")
         else:
             await event.edit(
-                "Shame that you don't have git, you're running - 'v2.5' anyway!"
+                "Shame that you don't have git, you're running - 'v1.beta.4' anyway!"
             )
 
 
@@ -131,14 +130,15 @@ async def pipcheck(pip):
 @register(outgoing=True, pattern=r"^\.(?:alive|on)\s?(.)?")
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
-    await alive.edit("`I'm Alive My Darkness Lord! `\n"
-                     f"> `Telethon : v{version.__version__} `\n"
-                     f"> `Python : v{python_version()} `\n"
-	                 "===================== \n"
-                     f"`User : `{DEFAULTUSER} \n"
-		             "===================== \n"
-                     f"__Running on {UPSTREAM_REPO_BRANCH}__ \n")
-
+    logo = ALIVE_LOGO
+    output = (f"`ProjectBish` is running on `{UPSTREAM_REPO_BRANCH}`\n"
+             f"====================================\n"
+             f"🐍 `Python    :` v{python_version()}\n"
+             f"⚙️ `Telethon  :` v{version.__version__}\n"
+             f"👤 `User      :` {DEFAULTUSER}\n"
+             f"====================================\n")
+    await bot.send_file(alive.chat_id, logo, caption=output)
+    await alive.delete()
 
 @register(outgoing=True, pattern="^.aliveu")
 async def amireallyaliveuser(username):
@@ -161,20 +161,21 @@ async def amireallyalivereset(ureset):
     await ureset.edit("`" "Successfully reset user for alive!" "`")
 
 
-CMD_HELP.update(
-    {"sysd": ".sysd\
-    \nUsage: Shows system information using neofetch."})
-CMD_HELP.update({"botver": ".botver\
-    \nUsage: Shows the userbot version."})
-CMD_HELP.update(
-    {"pip": ".pip <module(s)>\
-    \nUsage: Does a search of pip modules(s)."})
 CMD_HELP.update({
+    "sysd":
+    ">`.sysd`"
+    "\nUsage: Shows system information using neofetch.",
+    "botver":
+    ">`.botver`"
+    "\nUsage: Shows the userbot version.",
+    "pip":
+    ">`.pip <module(s)>`"
+    "\nUsage: Does a search of pip modules(s).",
     "alive":
-    ".alive | .on\
-    \nUsage: Type .alive/.on to see wether your bot is working or not.\
-    \n\n.aliveu <text>\
-    \nUsage: Changes the 'user' in alive to the text you want.\
-    \n\n.resetalive\
-    \nUsage: Resets the user to default."
+    ">`.alive`"
+    "\nUsage: Type .alive to see wether your bot is working or not."
+    "\n\n>`.aliveu <text>`"
+    "\nUsage: Changes the 'user' in alive to the text you want."
+    "\n\n>`.resetalive`"
+    "\nUsage: Resets the user to default."
 })
